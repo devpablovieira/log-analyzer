@@ -12,16 +12,17 @@ import java.util.stream.Stream;
 
 public class LogParser {
     private static final Pattern padrao = Pattern.compile("^(\\S+) - - \\[(.*?)\\] \"([A-Z]+) (.*?) HTTP/.*\" (\\d{3}) .*$");
-    public ArrayList<LogEntry> processarArquivo(Path caminhoDoArquivo) {
-        ArrayList<LogEntry> resultado = new ArrayList<>();
+    public LogReport processarArquivo(Path caminhoDoArquivo) {
+        LogReport relatorio = new LogReport();
         try(Stream<String> linhas = Files.lines(caminhoDoArquivo)) {
             linhas
                     .map(this::converterLinhaParaRecord)
-                    .forEach(resultado::add);
+                    .filter(entry -> entry != null)
+                    .forEach(relatorio::registrarAcesso);
         } catch (Exception e) {
             System.err.println("Erro ao ler linhas para arquivo: " + e.getMessage());
         }
-        return resultado;
+        return relatorio;
     }
 
     private LogEntry converterLinhaParaRecord(String linha) {

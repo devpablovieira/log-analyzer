@@ -3,7 +3,7 @@ package com.pablovieira.loganalyzer;
 import java.time.ZonedDateTime;
 
 public record LogEntry(
-    String ipAdress,
+    String ipAddress,
     ZonedDateTime timestamp,
     String httpMethod,
     String path,
