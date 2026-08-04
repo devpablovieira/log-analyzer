@@ -1,26 +1,22 @@
 package com.pablovieira.loganalyzer;
 
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-public class LogParserTest extends TestCase {
-
+public class LogParserTest {
     @Test
-    @DisplayName("Should return formatted data")
-    public void testdeveRetornarDataFormatada(){
+    @DisplayName("should return formatted data")
+    public void formatData(){
         LogParser logParser = new LogParser();
         Path path = FileSystems.getDefault().getPath("data","access.log");
         LogReport result = logParser.processarArquivo(path);
-        assertTrue(result != null);
+        assertNotNull(result);
     }
 
 }

@@ -33,4 +33,14 @@ public class LogReport {
         return top;
     }
 
+    public long getTotalRequisicoes() {
+        return this.totalRequisicoes;
+    }
+    public long getTotalErros() {
+        return this.totalErros;
+    }
+    public Map<String, Long> getAcessosPorIp() {
+        return this.acessosPorIp;
+    }
+
 }
