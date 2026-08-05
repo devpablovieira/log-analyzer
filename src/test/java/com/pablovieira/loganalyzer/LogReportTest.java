@@ -13,7 +13,7 @@ public class LogReportTest {
     @DisplayName("should return TOP 5 IPs ")
     public void topIp(){
         LogReport report = new LogReport();
-        List<Map.Entry<String, Long>> result = report.retornaTop();
+        Map<String, Long> result = report.getTop5Ips();
         assertTrue(result.isEmpty());
     }
 }
