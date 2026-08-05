@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class LogParserTest {
     @Test
     @DisplayName("should return formatted data")
-    public void formatData(){
+    public void formattedData(){
         LogParser logParser = new LogParser();
         Path path = FileSystems.getDefault().getPath("data","access.log");
         LogReport result = logParser.processarArquivo(path);

@@ -1,6 +1,7 @@
 package com.pablovieira.loganalyzer;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Map.Entry.comparingByValue;
 
@@ -17,20 +18,23 @@ public class LogReport {
         acessosPorIp.put(entry.ipAddress(), acessosPorIp.getOrDefault(entry.ipAddress(), 0L) + 1);
     }
 
-    public double porcentagemErro() {
+    public double getPorcentagemDeErro() {
         if(this.totalRequisicoes == 0L) {
             throw new IllegalArgumentException("sem requisicoes");
         }
         return (this.totalErros * 100.0 )/ this.totalRequisicoes;
     }
 
-    public List<Map.Entry<String, Long>> retornaTop() {
-
-        List<Map.Entry<String, Long>> top = acessosPorIp.entrySet().stream()
+    public Map<String, Long> getTop5Ips() {
+        return acessosPorIp.entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
                 .limit(5)
-                .toList();
-        return top;
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 
     public long getTotalRequisicoes() {
@@ -39,6 +43,7 @@ public class LogReport {
     public long getTotalErros() {
         return this.totalErros;
     }
+
     public Map<String, Long> getAcessosPorIp() {
         return this.acessosPorIp;
     }
