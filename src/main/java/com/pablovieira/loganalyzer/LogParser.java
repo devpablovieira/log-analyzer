@@ -1,10 +1,11 @@
 package com.pablovieira.loganalyzer;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,13 +20,13 @@ public class LogParser {
                     .map(this::converterLinhaParaRecord)
                     .filter(entry -> entry != null)
                     .forEach(relatorio::registrarAcesso);
-        } catch (Exception e) {
-            System.err.println("Erro ao ler linhas para arquivo: " + e.getMessage());
+        } catch (IOException e) {
+            throw new UncheckedIOException("Erro ao ler o arquivo", e);
         }
         return relatorio;
     }
 
-    private LogEntry converterLinhaParaRecord(String linha) {
+    protected LogEntry converterLinhaParaRecord(String linha) {
         Matcher matcher = padrao .matcher(linha);
         if (matcher.matches()) {
             String ip = matcher.group(1);
