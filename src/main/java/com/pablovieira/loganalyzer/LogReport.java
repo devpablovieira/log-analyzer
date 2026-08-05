@@ -12,16 +12,12 @@ public class LogReport {
 
     public void registrarAcesso(LogEntry entry) {
         this.totalRequisicoes++;
-        if(entry.statusCode() >= 400) {
-            this.totalErros++;
-        }
+        if(entry.statusCode() >= 400) this.totalErros++;
         acessosPorIp.put(entry.ipAddress(), acessosPorIp.getOrDefault(entry.ipAddress(), 0L) + 1);
     }
 
     public double getPorcentagemDeErro() {
-        if(this.totalRequisicoes == 0L) {
-            throw new IllegalArgumentException("sem requisicoes");
-        }
+        if(this.totalRequisicoes == 0L) return 0;
         return (this.totalErros * 100.0 )/ this.totalRequisicoes;
     }
 
@@ -43,9 +39,8 @@ public class LogReport {
     public long getTotalErros() {
         return this.totalErros;
     }
-
     public Map<String, Long> getAcessosPorIp() {
-        return this.acessosPorIp;
+        return Collections.unmodifiableMap(this.acessosPorIp);
     }
 
 }
