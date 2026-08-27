@@ -1,12 +1,12 @@
 #  Nginx Log Analyzer (Java CLI)
 
-Uma ferramenta de linha de comando (CLI) focada em performance para analisar logs gigantescos de servidores Nginx, extrair estatísticas de acesso e exportar relatórios em formato JSON.
+Uma ferramenta de linha de comando (CLI) para analise de logs gigantescos de servidores Nginx, extração de estatísticas de acesso e exportação de relatórios em formato JSON.
 
 Este projeto foi construído com foco em **Eficiência de Memória** e **Engenharia de Software**, processando arquivos sem sobrecarregar a memória RAM.
 
 ##  Funcionalidades
 
-*   **Processamento de Arquivos Grandes:** Utiliza a API `java.nio.file.Files` e Streams para ler o arquivo linha por linha (Lazy Evaluation), evitando o erro `OutOfMemory`.
+*   **Processamento de Arquivos Grandes:** Utilizei a API `java.nio.file.Files` e Streams para ler o arquivo linha por linha (Lazy Evaluation), evitando o erro `OutOfMemory`.
 *   **Análise via Regex:** Quebra linhas complexas do Nginx Combined Log Format usando expressões regulares estruturadas.
 *   **Domínio Imutável:** Representação dos dados lidos utilizando Java `Records`.
 *   **Interface rica no terminal:** Argumentos validados e interface de ajuda (`--help`) construída com Picocli.
