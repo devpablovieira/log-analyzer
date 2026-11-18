@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
 
 public class App implements Callable<Integer> {
 
-    @Option(names = {"-i", "--input"}, required = true, description = "Caminho do arquivo de log (ex: data/access.log)")
+    @Option(names = {"-i", "--input"}, required = true, description = "Caminho do arquivo de log (ex: data/access.log)", defaultValue = "data/access.log")
     private Path arquivoEntrada;
 
     @Option(names = {"-o", "--output"}, description = "Onde salvar o relatório", defaultValue = "relatorio.json")
